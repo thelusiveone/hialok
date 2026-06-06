@@ -1,0 +1,49 @@
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-none border-b border-gray-200/50 dark:border-gray-800/50 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-2 group">
+                <span class="text-xl font-bold text-brand-500 font-mono">&lt;</span>
+                <span class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-brand-500 transition-colors">Alok</span>
+                <span class="text-xl font-bold text-brand-500 font-mono">/&gt;</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-1">
+                <a href="/#about" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">About</a>
+                <a href="/#skills" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Skills</a>
+                <a href="/#experience" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Experience</a>
+                <a href="/#projects" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Projects</a>
+                <a href="/#contact" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Contact</a>
+                <a href="/blog" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Blog</a>
+
+                <div class="w-px h-5 bg-gray-300 dark:bg-gray-700 mx-2"></div>
+
+                <!-- Theme Toggle -->
+                {% include "components/theme_toggle.html" %}
+            </div>
+
+            <!-- Mobile: theme toggle + hamburger -->
+            <div class="flex items-center gap-2 md:hidden">
+                {% include "components/theme_toggle.html" %}
+                <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" aria-label="Menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <div class="py-3 space-y-1 border-t border-gray-200 dark:border-gray-800">
+                <a href="/#about" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">About</a>
+                <a href="/#skills" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Skills</a>
+                <a href="/#experience" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Experience</a>
+                <a href="/#projects" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Projects</a>
+                <a href="/#contact" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Contact</a>
+                <a href="/blog" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50">Blog</a>
+            </div>
+        </div>
+    </div>
+</nav>

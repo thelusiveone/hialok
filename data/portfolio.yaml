@@ -1,0 +1,102 @@
+name: "Alok Shukla"
+title: "Python Software Developer"
+tagline: "Building fast, scalable backends that power real products."
+email: "hello@hialok.com"
+location: "India"
+
+social:
+  github: "https://github.com/alokshukla"
+  linkedin: "https://linkedin.com/in/alokshukla"
+  twitter: "https://x.com/alokshukla"
+
+about:
+  description: |
+    I'm a Python developer who loves building clean, performant backend systems.
+    I work primarily with FastAPI, Django, and PostgreSQL to create APIs and services
+    that handle real-world traffic at scale. When I'm not writing code, I'm exploring
+    system design patterns, contributing to open source, or writing about Python on my blog.
+  stats:
+    - label: "Years Experience"
+      value: "4+"
+    - label: "Projects Shipped"
+      value: "20+"
+    - label: "GitHub Contributions"
+      value: "500+"
+    - label: "Blog Posts"
+      value: "10+"
+
+skills:
+  languages:
+    - { name: "Python", level: 95 }
+    - { name: "SQL", level: 85 }
+    - { name: "JavaScript", level: 65 }
+    - { name: "TypeScript", level: 55 }
+    - { name: "Bash", level: 70 }
+  frameworks:
+    - { name: "FastAPI", level: 92 }
+    - { name: "Django", level: 88 }
+    - { name: "Flask", level: 80 }
+    - { name: "Celery", level: 75 }
+    - { name: "SQLAlchemy", level: 82 }
+  tools:
+    - "Docker"
+    - "PostgreSQL"
+    - "Redis"
+    - "AWS (EC2, S3, Lambda)"
+    - "Git & GitHub"
+    - "Linux"
+    - "Nginx"
+    - "CI/CD (GitHub Actions)"
+    - "RabbitMQ"
+    - "MongoDB"
+
+experience:
+  - company: "TechCorp Solutions"
+    role: "Senior Python Developer"
+    period: "2023 - Present"
+    highlights:
+      - "Architected microservices handling 15K+ requests/second using FastAPI and async Python"
+      - "Reduced API response times by 45% through query optimization and Redis caching"
+      - "Led migration from monolithic Django app to event-driven microservices"
+      - "Mentored 3 junior developers and established team coding standards"
+  - company: "DataFlow Inc."
+    role: "Python Developer"
+    period: "2021 - 2023"
+    highlights:
+      - "Built real-time data pipeline processing 2M+ events/day with Celery and RabbitMQ"
+      - "Developed RESTful APIs serving 50+ internal and external consumers"
+      - "Implemented comprehensive test suites achieving 92% code coverage"
+      - "Automated deployment workflows with Docker and GitHub Actions CI/CD"
+  - company: "StartupHub"
+    role: "Junior Python Developer"
+    period: "2020 - 2021"
+    highlights:
+      - "Developed and maintained Django web applications for 3 client projects"
+      - "Created automated web scraping pipelines for market intelligence"
+      - "Built admin dashboards with Django REST Framework and React"
+
+projects:
+  - title: "FastAPI Microservices Starter"
+    description: "Production-ready microservices template with async PostgreSQL, Redis caching, JWT auth, and Docker Compose orchestration. Used by 200+ developers."
+    tech: ["FastAPI", "PostgreSQL", "Redis", "Docker", "SQLAlchemy"]
+    github: "https://github.com/alokshukla/fastapi-microservices"
+    live: ""
+    image: ""
+  - title: "PyPipeline"
+    description: "A lightweight ETL framework for Python that handles data extraction, transformation, and loading with built-in retry logic and monitoring."
+    tech: ["Python", "Celery", "RabbitMQ", "PostgreSQL", "Grafana"]
+    github: "https://github.com/alokshukla/pypipeline"
+    live: ""
+    image: ""
+  - title: "CodeReview Bot"
+    description: "GitHub bot that automatically reviews pull requests using AST analysis, checks for common Python anti-patterns, and suggests improvements."
+    tech: ["Python", "FastAPI", "GitHub API", "Docker", "Redis"]
+    github: "https://github.com/alokshukla/codereview-bot"
+    live: ""
+    image: ""
+  - title: "Real-time Chat API"
+    description: "WebSocket-based chat API supporting 10K concurrent connections with room management, message persistence, and typing indicators."
+    tech: ["FastAPI", "WebSockets", "Redis", "PostgreSQL", "Docker"]
+    github: "https://github.com/alokshukla/realtime-chat-api"
+    live: ""
+    image: ""

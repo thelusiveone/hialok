@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+jinja2
+python-multipart
+markdown
+pygments
+pyyaml
+pydantic-settings
+aiofiles
+httpx
