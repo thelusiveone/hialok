@@ -1,0 +1,57 @@
+<section id="about" class="py-24 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="animate-on-scroll">
+            <!-- Section header -->
+            <div class="flex items-center gap-3 mb-12">
+                <span class="text-brand-500 font-mono text-sm font-semibold">01.</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">About Me</h2>
+                <div class="flex-1 h-px bg-gray-200 dark:bg-gray-800 max-w-xs"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+                <!-- Text content -->
+                <div class="lg:col-span-3 space-y-6">
+                    {% for paragraph in about.description.split('\n') %}
+                    {% if paragraph.strip() %}
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">{{ paragraph.strip() }}</p>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- Tech I work with -->
+                    <div class="pt-4">
+                        <p class="text-sm font-semibold text-gray-900 dark:text-white mb-3">Technologies I work with daily:</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            {% for tech in ['Python', 'FastAPI', 'Django', 'PostgreSQL', 'Docker', 'Redis'] %}
+                            <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                                <svg class="w-3 h-3 text-brand-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                {{ tech }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo + Stats -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Photo placeholder -->
+                    <div class="relative group">
+                        <div class="w-64 h-64 mx-auto rounded-2xl bg-gradient-to-br from-brand-500/20 to-purple-500/20 dark:from-brand-500/10 dark:to-purple-500/10 border-2 border-brand-500/20 flex items-center justify-center overflow-hidden">
+                            <div class="text-6xl font-bold font-mono text-brand-500/30">AS</div>
+                        </div>
+                        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-br from-brand-500 to-purple-500 opacity-0 group-hover:opacity-20 blur transition-opacity duration-300 -z-10"></div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-2 gap-3">
+                        {% for stat in about.stats %}
+                        <div class="text-center p-4 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800">
+                            <div class="text-2xl font-bold text-brand-500 mb-1">{{ stat.value }}</div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400">{{ stat.label }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
