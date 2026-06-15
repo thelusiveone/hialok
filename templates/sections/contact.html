@@ -1,98 +1,87 @@
-<section id="contact" class="py-24 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto">
-        <div class="animate-on-scroll">
-            <!-- Section header -->
-            <div class="flex items-center gap-3 mb-4">
-                <span class="text-brand-500 font-mono text-sm font-semibold">05.</span>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Get In Touch</h2>
-                <div class="flex-1 h-px bg-gray-200 dark:bg-gray-800 max-w-xs"></div>
+<section id="contact" class="py-20 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="term-window bg-term-surface border border-term-border rounded-lg overflow-hidden">
+            <!-- Terminal header -->
+            <div class="flex items-center gap-2 px-4 py-2 bg-term-bg border-b border-term-border">
+                <span class="text-xs text-term-muted">~/contact</span>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 mb-12 max-w-xl">Have a project in mind, a question, or just want to say hi? My inbox is always open.</p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
-                <!-- Contact Form -->
-                <div class="lg:col-span-3">
-                    <form id="contact-form"
-                          hx-post="/api/contact"
-                          hx-target="#contact-form"
-                          hx-swap="outerHTML"
-                          hx-headers='{"Content-Type": "application/json"}'
-                          hx-ext="json-enc"
-                          class="space-y-5">
+            <div class="p-6 sm:p-8 space-y-6 text-sm sm:text-base term-block">
+                <!-- Run contact script -->
+                <p class="term-cmd text-term-text" data-cmd="./contact.sh --interactive"><span class="text-term-green">$ </span>./contact.sh --interactive</p>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Name</label>
-                                <input type="text" id="name" name="name" required
-                                       class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors"
-                                       placeholder="Your name">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email</label>
-                                <input type="email" id="email" name="email" required
-                                       class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors"
-                                       placeholder="you@example.com">
-                            </div>
+                <div class="term-out bg-term-bg border border-term-border rounded-lg p-6">
+                    <p class="text-term-green mb-6">Initiating contact protocol...</p>
+
+                    <!-- Contact form styled as terminal input -->
+                    <form hx-post="/api/contact" hx-ext="json-enc" hx-target="#contact-result" hx-swap="innerHTML" class="space-y-4">
+                        <div>
+                            <label class="block text-term-purple mb-2">name <span class="text-term-muted">(required)</span>:</label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                required
+                                class="w-full bg-term-surface border border-term-border rounded px-4 py-2 text-term-text focus:border-term-green focus:outline-none"
+                                placeholder=">>> "
+                            >
                         </div>
 
                         <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Message</label>
-                            <textarea id="message" name="message" rows="5" required
-                                      class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-colors resize-none"
-                                      placeholder="What's on your mind?"></textarea>
+                            <label class="block text-term-purple mb-2">email <span class="text-term-muted">(required)</span>:</label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                required
+                                class="w-full bg-term-surface border border-term-border rounded px-4 py-2 text-term-text focus:border-term-green focus:outline-none"
+                                placeholder=">>> "
+                            >
                         </div>
 
-                        <button type="submit"
-                                class="px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all duration-300 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                            Send Message
+                        <div>
+                            <label class="block text-term-purple mb-2">message <span class="text-term-muted">(required)</span>:</label>
+                            <textarea 
+                                name="message" 
+                                rows="4" 
+                                required
+                                class="w-full bg-term-surface border border-term-border rounded px-4 py-2 text-term-text focus:border-term-green focus:outline-none resize-none"
+                                placeholder=">>> Enter your message..."
+                            ></textarea>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            class="px-6 py-2 bg-term-green/10 border border-term-green/30 text-term-green rounded hover:bg-term-green/20 transition-colors"
+                        >
+                            $ send --execute
                         </button>
                     </form>
+
+                    <div id="contact-result" class="mt-4"></div>
                 </div>
 
-                <!-- Contact Info -->
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 space-y-5">
-                        <div class="flex items-start gap-4">
-                            <div class="p-2.5 rounded-xl bg-brand-500/10 flex-shrink-0">
-                                <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-semibold text-gray-900 dark:text-white">Email</p>
-                                <a href="mailto:{{ email }}" class="text-sm text-brand-500 hover:text-brand-400 transition-colors">{{ email }}</a>
-                            </div>
-                        </div>
+                <div class="term-out border-t border-term-border my-6"></div>
 
-                        <div class="flex items-start gap-4">
-                            <div class="p-2.5 rounded-xl bg-brand-500/10 flex-shrink-0">
-                                <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-semibold text-gray-900 dark:text-white">Location</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ location }}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="p-2.5 rounded-xl bg-emerald-500/10 flex-shrink-0">
-                                <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-semibold text-gray-900 dark:text-white">Status</p>
-                                <p class="text-sm text-emerald-500 flex items-center gap-1.5">
-                                    <span class="w-2 h-2 bg-emerald-500 rounded-full inline-block"></span>
-                                    Available for opportunities
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Resume Download -->
-                    <a href="/static/resume.pdf" download class="flex items-center justify-center gap-2 w-full px-6 py-3 text-sm font-semibold text-brand-500 border border-brand-500/30 rounded-xl hover:bg-brand-500/5 transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        Download Resume
+                <!-- Alternative contact methods -->
+                <p class="term-out text-term-muted"><span class="text-term-green">$</span> echo $CONTACT_METHODS</p>
+                <div class="term-out grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 pl-2">
+                    <a href="mailto:{{ contact_email }}" class="flex items-center gap-3 text-term-blue hover:text-term-cyan transition-colors">
+                        <span class="text-term-muted">email:</span> {{ contact_email }}
+                    </a>
+                    <a href="{{ linkedin_url }}" target="_blank" class="flex items-center gap-3 text-term-blue hover:text-term-cyan transition-colors">
+                        <span class="text-term-muted">linkedin:</span> /in/alokshukla
+                    </a>
+                    <a href="{{ github_url }}" target="_blank" class="flex items-center gap-3 text-term-blue hover:text-term-cyan transition-colors">
+                        <span class="text-term-muted">github:</span> @alokshukla
+                    </a>
+                    <a href="{{ twitter_url }}" target="_blank" class="flex items-center gap-3 text-term-blue hover:text-term-cyan transition-colors">
+                        <span class="text-term-muted">twitter:</span> @alokshukla
                     </a>
                 </div>
+
+                <!-- Cursor -->
+                <p class="text-term-muted mt-6">
+                    <span class="text-term-green">➜</span> <span class="text-term-blue">~/contact</span> <span class="cursor-blink inline-block w-2 h-4 bg-term-text/70 align-text-bottom"></span>
+                </p>
             </div>
         </div>
     </div>
