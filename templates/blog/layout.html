@@ -4,19 +4,27 @@
 {% block meta_description %}Technical blog by Alok Shukla covering Python, FastAPI, system design, and software engineering best practices.{% endblock %}
 
 {% block content %}
-<div class="pt-24 pb-16 px-4 sm:px-6">
+<div class="py-16 px-4 sm:px-6">
     <div class="max-w-4xl mx-auto">
-        <!-- Blog Header -->
-        <div class="mb-12">
-            <div class="flex items-center gap-2 mb-2">
-                <a href="/" class="text-sm text-gray-400 hover:text-brand-500 transition-colors">Home</a>
-                <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                <span class="text-sm text-brand-500">Blog</span>
+        <div class="bg-term-surface border border-term-border rounded-lg overflow-hidden term-glow">
+            <!-- Terminal header -->
+            <div class="flex items-center justify-between px-4 py-3 bg-term-bg border-b border-term-border">
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-3 h-3 rounded-full bg-term-red"></span>
+                        <span class="w-3 h-3 rounded-full bg-term-yellow"></span>
+                        <span class="w-3 h-3 rounded-full bg-term-green"></span>
+                    </div>
+                    <span class="text-xs text-term-muted ml-2">alok@hialok: ~/blog</span>
+                </div>
+                <a href="/" class="text-xs text-term-muted hover:text-term-green transition-colors">cd ~</a>
             </div>
-            {% block blog_header %}{% endblock %}
-        </div>
 
-        {% block blog_content %}{% endblock %}
+            <div class="p-6 sm:p-8 text-sm sm:text-base">
+                {% block blog_header %}{% endblock %}
+                {% block blog_content %}{% endblock %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

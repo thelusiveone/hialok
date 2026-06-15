@@ -1,40 +1,200 @@
-/* ===== Scroll Behavior ===== */
+/* ===== Terminal Theme Styles ===== */
+
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 4rem;
 }
 
-/* ===== Selection ===== */
+/* Subtle ambient glow behind the page */
+body {
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(63, 185, 80, 0.06), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(88, 166, 255, 0.04), transparent);
+    background-attachment: fixed;
+}
+
+/* Selection */
 ::selection {
-    background-color: #6366f1;
-    color: white;
+    background-color: #3fb950;
+    color: #0d1117;
 }
 
-/* ===== Scrollbar ===== */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #0d1117;
 }
 ::-webkit-scrollbar-thumb {
-    background: #4b5563;
+    background: #30363d;
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #6b7280;
+    background: #484f58;
 }
 
-/* ===== Code Highlighting (Pygments) ===== */
+/* Terminal cursor blink */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.animate-pulse {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* ===== CRT Scanlines Overlay ===== */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.07) 0px,
+        rgba(0, 0, 0, 0.07) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Subtle vignette for CRT depth */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.35) 100%);
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* ===== Phosphor Glow ===== */
+.text-glow-green {
+    text-shadow: 0 0 8px rgba(63, 185, 80, 0.5);
+}
+.text-glow-orange {
+    text-shadow: 0 0 8px rgba(249, 115, 22, 0.45);
+}
+.term-glow {
+    box-shadow:
+        0 0 0 1px rgba(63, 185, 80, 0.05),
+        0 0 40px rgba(63, 185, 80, 0.04),
+        0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Typed Command + Output Reveal ===== */
+.term-cmd.typing::after {
+    content: "▋";
+    color: #3fb950;
+    animation: blink 0.7s steps(1) infinite;
+}
+
+html.js .term-out {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+html.js .term-out.executed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* No-JS fallback: render commands statically */
+html:not(.js) .term-cmd::before {
+    content: "$ " attr(data-cmd);
+}
+
+/* ===== Scroll-Spy Active Nav Link ===== */
+nav a.nav-active {
+    color: #3fb950;
+    text-shadow: 0 0 8px rgba(63, 185, 80, 0.4);
+}
+nav a.nav-active::before {
+    content: "* ";
+}
+
+/* Authentic terminal block cursor: hard on/off blink */
+.cursor-blink {
+    animation: blink 1.1s steps(1, end) infinite;
+}
+
+/* ===== Terminal Window Chrome ===== */
+.term-window {
+    box-shadow:
+        0 0 0 1px rgba(48, 54, 61, 0.6),
+        0 16px 48px -12px rgba(0, 0, 0, 0.7),
+        0 0 40px -16px rgba(63, 185, 80, 0.12);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.term-window:hover {
+    box-shadow:
+        0 0 0 1px rgba(63, 185, 80, 0.25),
+        0 16px 48px -12px rgba(0, 0, 0, 0.7),
+        0 0 56px -12px rgba(63, 185, 80, 0.18);
+}
+
+/* Traffic lights: reveal glyphs on header hover, like macOS */
+.term-window .traffic-light {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    line-height: 1;
+    color: transparent;
+    transition: color 0.15s ease;
+}
+.term-window:hover .traffic-light {
+    color: rgba(0, 0, 0, 0.55);
+}
+
+/* ===== Scroll-Triggered Command Output ===== */
+/* Hidden only when JS is running (html.js set in main.js) so content
+   degrades gracefully without JavaScript. */
+html.js .term-out {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+html.js .term-out.executed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cursor appended while a command is being typed out */
+.term-cmd .typing::after {
+    content: "▋";
+    color: #3fb950;
+    animation: blink 0.7s steps(1, end) infinite;
+    margin-left: 1px;
+}
+
+/* ===== Interactive Terminal Prompt ===== */
+#terminal-input {
+    caret-color: #3fb950;
+}
+#terminal-history {
+    max-height: 16rem;
+    overflow-y: auto;
+}
+
+/* Code Highlighting (Pygments - Terminal theme) */
 .highlight {
-    background: #1e1e2e;
-    border-radius: 0.75rem;
-    padding: 1.25rem;
+    background: #161b22;
+    border-radius: 0.5rem;
+    padding: 1rem;
     overflow-x: auto;
     font-size: 0.875rem;
     line-height: 1.7;
     margin: 1.5rem 0;
-    border: 1px solid rgba(99, 102, 241, 0.15);
+    border: 1px solid #30363d;
 }
 
 .highlight pre {
@@ -42,95 +202,49 @@ html {
     font-family: 'JetBrains Mono', monospace;
 }
 
-.highlight .hll { background-color: #383a59 }
-.highlight .c { color: #6272a4; font-style: italic }
-.highlight .k { color: #ff79c6 }
-.highlight .n { color: #f8f8f2 }
-.highlight .o { color: #ff79c6 }
-.highlight .p { color: #f8f8f2 }
-.highlight .cm { color: #6272a4; font-style: italic }
-.highlight .cp { color: #ff79c6 }
-.highlight .c1 { color: #6272a4; font-style: italic }
-.highlight .cs { color: #6272a4; font-style: italic }
-.highlight .gd { color: #ff5555 }
-.highlight .ge { font-style: italic }
-.highlight .gi { color: #50fa7b }
-.highlight .go { color: #44475a }
-.highlight .gp { color: #f8f8f2 }
-.highlight .gs { font-weight: bold }
-.highlight .gu { color: #6272a4; font-weight: bold }
-.highlight .kc { color: #ff79c6 }
-.highlight .kd { color: #8be9fd; font-style: italic }
-.highlight .kn { color: #ff79c6 }
-.highlight .kp { color: #ff79c6 }
-.highlight .kr { color: #ff79c6 }
-.highlight .kt { color: #8be9fd }
-.highlight .m { color: #bd93f9 }
-.highlight .s { color: #f1fa8c }
-.highlight .na { color: #50fa7b }
-.highlight .nb { color: #8be9fd; font-style: italic }
-.highlight .nc { color: #50fa7b }
-.highlight .no { color: #f8f8f2 }
-.highlight .nd { color: #50fa7b; font-weight: bold }
-.highlight .ni { color: #f8f8f2 }
-.highlight .ne { color: #50fa7b }
-.highlight .nf { color: #50fa7b }
-.highlight .nl { color: #8be9fd; font-style: italic }
-.highlight .nn { color: #f8f8f2 }
-.highlight .nt { color: #ff79c6 }
-.highlight .nv { color: #f8f8f2 }
-.highlight .ow { color: #ff79c6 }
-.highlight .w { color: #f8f8f2 }
-.highlight .mf { color: #bd93f9 }
-.highlight .mh { color: #bd93f9 }
-.highlight .mi { color: #bd93f9 }
-.highlight .mo { color: #bd93f9 }
-.highlight .sb { color: #f1fa8c }
-.highlight .sc { color: #f1fa8c }
-.highlight .sd { color: #f1fa8c }
-.highlight .s2 { color: #f1fa8c }
-.highlight .se { color: #f1fa8c }
-.highlight .sh { color: #f1fa8c }
-.highlight .si { color: #f1fa8c }
-.highlight .sx { color: #f1fa8c }
-.highlight .sr { color: #f1fa8c }
-.highlight .s1 { color: #f1fa8c }
-.highlight .ss { color: #f1fa8c }
-.highlight .bp { color: #f8f8f2; font-style: italic }
-.highlight .vc { color: #f8f8f2 }
-.highlight .vg { color: #f8f8f2 }
-.highlight .vi { color: #f8f8f2 }
-.highlight .il { color: #bd93f9 }
+.highlight .c { color: #8b949e; font-style: italic }
+.highlight .k { color: #ff7b72 }
+.highlight .n { color: #c9d1d9 }
+.highlight .o { color: #ff7b72 }
+.highlight .p { color: #c9d1d9 }
+.highlight .s { color: #a5d6ff }
+.highlight .nf { color: #d2a8ff }
+.highlight .nc { color: #f0883e }
+.highlight .nb { color: #79c0ff }
+.highlight .mi { color: #a5d6ff }
+.highlight .mf { color: #a5d6ff }
 
-/* ===== Blog Content Prose ===== */
+/* Blog Content Prose */
 .prose h1, .prose h2, .prose h3, .prose h4 {
     font-weight: 700;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
+    color: #3fb950;
 }
-.prose h1 { font-size: 2rem; }
+.prose h1 { font-size: 1.75rem; }
 .prose h2 { font-size: 1.5rem; }
 .prose h3 { font-size: 1.25rem; }
 .prose p { margin-bottom: 1.25rem; line-height: 1.8; }
 .prose ul, .prose ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
 .prose li { margin-bottom: 0.5rem; line-height: 1.7; }
-.prose ul { list-style-type: disc; }
+.prose ul { list-style-type: none; }
+.prose ul li::before { content: "- "; color: #3fb950; }
 .prose ol { list-style-type: decimal; }
-.prose a { color: #818cf8; text-decoration: underline; }
-.prose a:hover { color: #6366f1; }
+.prose a { color: #58a6ff; text-decoration: underline; }
+.prose a:hover { color: #79c0ff; }
 .prose blockquote {
-    border-left: 3px solid #6366f1;
+    border-left: 3px solid #3fb950;
     padding-left: 1rem;
     margin: 1.5rem 0;
-    color: #9ca3af;
+    color: #8b949e;
     font-style: italic;
 }
 .prose code:not(.highlight code) {
-    background: rgba(99, 102, 241, 0.1);
+    background: #161b22;
     padding: 0.15rem 0.4rem;
     border-radius: 0.25rem;
     font-size: 0.875em;
-    font-family: 'JetBrains Mono', monospace;
+    border: 1px solid #30363d;
 }
 .prose table {
     width: 100%;
@@ -138,105 +252,32 @@ html {
     margin: 1.5rem 0;
 }
 .prose th, .prose td {
-    border: 1px solid #374151;
+    border: 1px solid #30363d;
     padding: 0.75rem;
     text-align: left;
 }
 .prose th {
-    background: rgba(99, 102, 241, 0.1);
+    background: #161b22;
     font-weight: 600;
 }
 
-/* ===== Typing Animation ===== */
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-.cursor-blink::after {
-    content: '|';
-    animation: blink 1s infinite;
-    color: #6366f1;
-    font-weight: 300;
-}
-
-/* ===== Spotify Floating Widget ===== */
-@keyframes pulse-green {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-.spotify-pulse {
-    animation: pulse-green 2s ease-in-out infinite;
-}
-
-@keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-.spotify-spin {
-    animation: spin-slow 4s linear infinite;
+/* Spotify Widget - Terminal style */
+.spotify-container {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 0.5rem;
 }
 
 @keyframes eq-bounce {
     0%, 100% { height: 3px; }
-    50% { height: 14px; }
+    50% { height: 12px; }
 }
 .eq-bar {
     height: 3px;
-    animation: eq-bounce 0.8s ease-in-out infinite;
+    animation: eq-bounce 0.6s ease-in-out infinite;
 }
 
-@keyframes slide-in-left {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-.spotify-container {
-    animation: slide-in-left 0.4s ease-out;
-}
-
-@media (max-width: 640px) {
-    #spotify-floating {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 1rem;
-    }
-}
-
-/* ===== Skill Bar Animation ===== */
-@keyframes fill-bar {
-    from { width: 0; }
-}
-.skill-bar-fill {
-    animation: fill-bar 1s ease-out forwards;
-}
-
-/* ===== Section Fade In ===== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-.animate-on-scroll {
-    opacity: 0;
-}
-.animate-on-scroll.visible {
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* ===== Mobile Menu ===== */
+/* Mobile Menu */
 .mobile-menu {
     max-height: 0;
     overflow: hidden;
@@ -244,4 +285,79 @@ html {
 }
 .mobile-menu.open {
     max-height: 400px;
+}
+
+/* Terminal typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+.typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(30, end);
+}
+
+/* Scanline + CRT vignette overlay (subtle) */
+.scanlines::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(0, 0, 0, 0.025) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+}
+.scanlines::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.25) 100%);
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* Soft phosphor glow for key accents */
+.glow-green {
+    text-shadow: 0 0 8px rgba(63, 185, 80, 0.45);
+}
+.glow-orange {
+    text-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .animate-pulse,
+    .cursor-blink,
+    .term-cmd .typing::after,
+    .eq-bar {
+        animation: none;
+    }
+    html.js .term-out {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Focus styles for inputs */
+input:focus, textarea:focus {
+    box-shadow: 0 0 0 2px rgba(63, 185, 80, 0.3);
+}
+
+/* Link hover effect */
+a {
+    transition: color 0.2s ease;
+}
+
+/* Form placeholder */
+::placeholder {
+    color: #484f58;
 }
